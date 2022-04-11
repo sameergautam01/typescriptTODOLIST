@@ -5,7 +5,7 @@ import {ITask} from "./components/interface";
 
 const App:FC=() => {
   const[text,setText] =useState<string>("");
-  const[days,setDays] =useState<number>();
+  const[days,setDays] =useState<number>(0);
   const[todoList,setTodoList]=useState<ITask[]>([]);
   const handleOnChange =(e:ChangeEvent<HTMLInputElement>):void=> {
     if(e.target.name ==="items"){
@@ -15,10 +15,13 @@ const App:FC=() => {
     }
   }
 const handleOnCLick =():void=>{
+  if (text !=="" && days!==0){
+   
   const newTask:ITask ={ taskName:text ,taskDays:Number(days)};
   setTodoList([...todoList,newTask])
   setText("");
   setDays(0);
+  }
 }
 const handleOnClickButton =(nameToDel:string):void=>{
   setTodoList(todoList.filter((task)=>{
